@@ -6,7 +6,7 @@ def get_ip(driver, ip_site="https://api.ipify.org"):
     return driver.find_element_by_tag_name("body").text
 
 
-def make_selenium_instances(manager, headless=False):
+def make_selenium_instances(manager, headless=True, profile=None):
     configs = []
     for info in manager.get_containers():
         config = Configuration(proxy=IProxy(
@@ -14,7 +14,7 @@ def make_selenium_instances(manager, headless=False):
             manager.get_port(info, "8123/tcp"),
             manager.get_port(info, "8118/tcp"),
             manager.get_port(info, "9050/tcp")
-        ), headless=headless)
+        ), headless=headless, profile=profile)
         configs.append(config)
     drivers = []
     for config in configs:
