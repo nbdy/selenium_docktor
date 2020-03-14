@@ -7,6 +7,7 @@ check 'sdt.py' in this repo
 ```python
 from selenium_docktor import make_selenium_instances, get_ip
 from docktor import Manager
+from time import sleep
 
 def check_ips(drvs):
     for driver in drvs:
@@ -14,6 +15,7 @@ def check_ips(drvs):
 
 manager = Manager(2)  # 2 instances for testing
 manager.start()
+sleep(5)
 manager.wait_until_ready()
 drivers = make_selenium_instances(manager)  # create firefox instances with a proxy profile
 check_ips(drivers)  # or do other stuff
