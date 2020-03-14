@@ -13,9 +13,15 @@ def check_ips(drvs):
         print(get_ip(driver))
 
 manager = Manager(2)  # 2 instances for testing
+manager.start()
+manager.wait_until_ready()
 drivers = make_selenium_instances(manager)  # create firefox instances with a proxy profile
 check_ips(drivers)  # or do other stuff
 manager.change_all_identities()  # change identities of all containers
 drivers = make_selenium_instances(manager)  # needs to be done after every ip renew
 check_ips(drivers)  # outputs new ips
+for driver in drivers:
+    driver.close()
+manager.stop()
+manager.join()
 ```
