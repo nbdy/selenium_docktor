@@ -24,9 +24,8 @@ def make_selenium_instances(manager, headless=True, profile=None):
     for info in manager.get_containers():
         drivers.append(WebDriver.build(Configuration(proxy=IProxy(
             "127.0.0.1",
-            manager.get_port(info, "8123/tcp"),
+            manager.get_port(info, "8118/tcp"),  # 8123 todo fix: http proxy not working properly
             manager.get_port(info, "8118/tcp"),
             manager.get_port(info, "9050/tcp")
         ), headless=headless, profile=profile)))
-        print(drivers[-1].capabilities)
     return drivers
